@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Main from './pages/Main';
 import Rotas from './pages/Rotas';
 import SignIn from './pages/SignIn';
+import Parada from './pages/Parada';
 
 export default createAppContainer(
         createSwitchNavigator(
@@ -18,7 +19,8 @@ export default createAppContainer(
                 App: createBottomTabNavigator(
                     {
                         Main,
-                        Rotas
+                        Rotas,
+                        Parada
                     },
                     {
                         initialRouteName: 'Main',
