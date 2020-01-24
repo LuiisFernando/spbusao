@@ -20,5 +20,10 @@ export default function App() {
     Login();
   }, [])
 
-  return <Routes />;
+  return (
+    <>
+      <StatusBar barStyle="light-content" backgroundColor="#FFF" />
+      <Routes />
+    </>
+  );
 }
