@@ -1,29 +1,18 @@
 import React, { useEffect } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, Alert } from 'react-native';
+import { Provider } from 'react-redux';
 
-import Routes from './routes';
+import './config/ReactotronConfig';
+import store from './store';
 
-import api from './services/api';
+import App from './App';
 
-export default function App() {
-
-
-  async function Login() {
-    const response = await api.post('/Login/Autenticar?token=7d32aa212c6ae41c34f6035f53a3a2bf8ab72a8063dbdd1d7e1f1eb3e02ad093');
-
-    if (response && response.data) {
-      console.log(response.data);
-    }
-  }
-
-  useEffect(() => {
-    Login();
-  }, [])
+export default function Index() {
 
   return (
-    <>
+    <Provider store={store}>
       <StatusBar barStyle="light-content" backgroundColor="#FFF" />
-      <Routes />
-    </>
+      <App />
+    </Provider>
   );
 }

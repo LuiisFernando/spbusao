@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Alert, Image } from 'react-native';
+import { Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -7,21 +8,29 @@ import header from '../../assets/maps2.png';
 
 import api from '../../services/api';
 
+import { signInRequest } from '../../store/modules/auth/actions';
+
 import {
     Container,
     Header,
     List,
     OnibusContainer,
-    HeaderImage
+    HeaderImage,
+    Letreiro,
+    OrigemDestino
 } from './styles';
 
 export default function Main() {
+    const dispatch = useDispatch();
+
     const [onibus, setOnibus] = useState([]);
 
     async function loadOnibus() {
         try {
+            await dispatch(signInRequest('7d32aa212c6ae41c34f6035f53a3a2bf8ab72a8063dbdd1d7e1f1eb3e02ad093'));
+
             const response = await api.get('/Posicao');
-            let i = 0;
+
             setOnibus(response.data.l.map((onibus, index) => {
                 return {
                     id: index,
@@ -32,6 +41,10 @@ export default function Main() {
                     quantidade: onibus.qv
                 };
             }));
+
+            if (onibus) {
+                console.log('Carregou!');
+            }
 
         } catch(e) {
             Alert.alert(e.message);
@@ -53,9 +66,8 @@ export default function Main() {
                 keyExtractor={buss => String(buss.id)}
                 renderItem={({ item }) => (
                     <OnibusContainer>
-                        <Text>{item.letreiro}</Text>
-                        <Text>{item.letreiroOrigem}</Text>
-                        <Text>{item.letreiroDestino}</Text>
+                        <Letreiro>{item.letreiro}</Letreiro>
+                        <OrigemDestino>{item.letreiroOrigem} / {item.letreiroDestino}</OrigemDestino>
                     </OnibusContainer>
                 )}
             />

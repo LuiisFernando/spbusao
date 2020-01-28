@@ -5,16 +5,17 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import Auth from './pages/Auth';
 import Main from './pages/Main';
 import Rotas from './pages/Rotas';
-import SignIn from './pages/SignIn';
 import Parada from './pages/Parada';
 
-export default createAppContainer(
+export default (isSigned = false) =>
+ createAppContainer(
         createSwitchNavigator(
             {
                 Sign: createSwitchNavigator({
-                    SignIn
+                    Auth
                 }),
                 App: createBottomTabNavigator(
                     {
@@ -34,7 +35,7 @@ export default createAppContainer(
                 )
             },
             {
-                initialRouteName: 'App'
+                initialRouteName: isSigned ? 'App' : 'Sign'
             }
         )
 );

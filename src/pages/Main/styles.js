@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+
 export const Container = styled.View`
     flex: 1;
 `;
@@ -20,10 +21,23 @@ export const OnibusContainer = styled.View`
     padding-left: 20px;
     border-bottom-width: 1px;
     border-color: #eee;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
 `;
 
 export const HeaderImage = styled.Image`
     flex: 1;
+`;
+
+export const Letreiro = styled.Text`
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+`;
+
+export const OrigemDestino = styled.Text`
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 5px;
+    color: #999;
 `;
