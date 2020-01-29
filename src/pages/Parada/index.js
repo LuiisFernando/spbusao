@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps'
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Map from '../../components/Map';
 
@@ -75,8 +75,7 @@ const styles = StyleSheet.create({
 })
 
 Parada.navigationOptions = {
-    tabBarLabel: 'Parada',
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="directions" size={20} color={tintColor} />
+    tabBarIcon: ({ tintColor, focused }) => (
+      <Icon name={focused ? "directions" : "directions"} size={30} color={tintColor} />
     ),
 };

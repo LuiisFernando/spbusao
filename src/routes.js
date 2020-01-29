@@ -3,8 +3,6 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import Auth from './pages/Auth';
 import Main from './pages/Main';
 import Rotas from './pages/Rotas';
@@ -20,22 +18,41 @@ export default (isSigned = false) =>
                 App: createBottomTabNavigator(
                     {
                         Main,
-                        Rotas,
-                        Parada
+                        Parada,
+                        Onibus: {
+                            screen: createStackNavigator(
+                                {
+                                    Rotas
+                                },
+                                {
+                                    defaultNavigationOptions: {
+                                        headerTransparent: true,
+                                        headerTintColor: '#000',
+                                        headerLeftContainerStyle: {
+                                          marginLeft: 20,
+                                        },
+                                      }
+                                }
+                            )
+                        }
                     },
                     {
                         initialRouteName: 'Main',
                         resetOnBlur: true,
                         tabBarOptions: {
+                            showLabel: false,
                             keyboardHidesTabBar: true,
                             activeTintColor: '#000',
                             inactiveTintColor: '#999',
+                            style: {
+                                height: 50
+                            }
                         }
                     }
                 )
             },
             {
-                initialRouteName: isSigned ? 'App' : 'Sign'
+                initialRouteName: 'Sign'
             }
         )
 );

@@ -1,20 +1,32 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Container, Letreiro, MapContainer } from './styles';
 
-export default function Rotas() {
+export default function Rotas({ navigation }) {
+
+    const onibus = navigation.getParam('item');
+
     return (
-        <View>
-            <Text>Rotas</Text>
-        </View>
+        <Container>
+            <Letreiro></Letreiro>
+        </Container>
     );
 }
-
-Rotas.navigationOptions = {
-    tabBarLabel: 'Rotas',
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="person" size={20} color={tintColor} />
-    ),
-};
   
+
+Rotas.navigationOptions = ({ navigation }) => ({
+    title: 'Onibus',
+    tabBarIcon: ({ tintColor }) => (
+        <Icon name="directions-fork" size={30} color={tintColor} />
+      ),
+    headerLeft: () => (
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Main');
+        }}>
+        <Icon name="chevron-left" size={20} color="#000" />
+      </TouchableOpacity>
+    ),
+  });

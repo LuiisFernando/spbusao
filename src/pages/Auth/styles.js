@@ -11,7 +11,6 @@ export const WaitText = styled.Text`
     font-weight: bold;
 `;
 
-
 export const AuthText = styled.Text`
     font-size: 25px;
     color: red;

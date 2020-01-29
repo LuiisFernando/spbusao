@@ -14,16 +14,24 @@ import {
     Container,
     Header,
     List,
+    Onibus,
     OnibusContainer,
     HeaderImage,
+    SearchForm,
+    SearchTextInput,
+    SearchButton,
+    WrapLetreiro,
     Letreiro,
     OrigemDestino
 } from './styles';
 
-export default function Main() {
+export default function Main({ navigation }) {
     const dispatch = useDispatch();
 
+    const [filter, setFilter] = useState('');
     const [onibus, setOnibus] = useState([]);
+    const [onibusFiltered, setOnibusFiltered] = useState([]);
+
 
     async function loadOnibus() {
         try {
@@ -31,7 +39,7 @@ export default function Main() {
 
             const response = await api.get('/Posicao');
 
-            setOnibus(response.data.l.map((onibus, index) => {
+            const tOnibus = response.data.l.map((onibus, index) => {
                 return {
                     id: index,
                     codigo: onibus.cl,
@@ -40,14 +48,26 @@ export default function Main() {
                     letreiroDestino: onibus.lt1,
                     quantidade: onibus.qv
                 };
-            }));
+            });
 
-            if (onibus) {
-                console.log('Carregou!');
-            }
+            const onibusSanitezed = tOnibus.filter((onibus, index) => {
+                return index === tOnibus.findIndex(obj => { return obj.letreiro === onibus.letreiro });
+            });
 
-        } catch(e) {
+            setOnibus(onibusSanitezed);
+            setOnibusFiltered(onibusSanitezed);
+
+        } catch (e) {
             Alert.alert(e.message);
+        }
+    }
+
+    function filterOnibus() {
+        if (filter) {
+            const teste = onibus.filter(x => x.letreiro.includes(filter.toUpperCase()));
+            setOnibusFiltered(teste);
+        } else {
+            setOnibusFiltered(onibus);
         }
     }
 
@@ -55,30 +75,51 @@ export default function Main() {
         loadOnibus();
     }, []);
 
+    useEffect(() => {
+        filterOnibus();
+    }, [filter]);
+
     return (
         <Container>
             <Header>
-                <HeaderImage source={header} style={{resizeMode: 'cover'}} />
+                <HeaderImage source={header} style={{ resizeMode: 'cover' }} />
             </Header>
+            <SearchForm>
+                <SearchTextInput
+                    placeholder="Digite o letreiro do ônibus"
+                    placeholderTextColor="#999"
+                    autoCapitalize="words"
+                    autoCorrect={false}
+                    value={filter}
+                    onChangeText={setFilter}
+                />
+                <SearchButton>
+                    <Icon name="my-location" size={20} color="#FFF" />
+                </SearchButton>
+            </SearchForm>
             {onibus && (
-            <List 
-                data={onibus}
-                keyExtractor={buss => String(buss.id)}
-                renderItem={({ item }) => (
-                    <OnibusContainer>
-                        <Letreiro>{item.letreiro}</Letreiro>
-                        <OrigemDestino>{item.letreiroOrigem} / {item.letreiroDestino}</OrigemDestino>
-                    </OnibusContainer>
-                )}
-            />
+                <List
+                    data={onibusFiltered}
+                    keyExtractor={buss => String(buss.id)}
+                    renderItem={({ item }) => (
+                        <Onibus onPress={() => navigation.navigate('Onibus', { item })}>
+                            <OnibusContainer>
+                                <WrapLetreiro>
+                                    <Letreiro>{item.letreiro}</Letreiro>
+                                    <Icon name={`filter-${item.quantidade > 9 ? '9-plus' : item.quantidade}`} size={20} />
+                                </WrapLetreiro>
+                                <OrigemDestino>{item.letreiroOrigem} / {item.letreiroDestino}</OrigemDestino>
+                            </OnibusContainer>
+                        </Onibus>
+                    )}
+                />
             )}
         </Container>
     );
 }
 
 Main.navigationOptions = {
-    tabBarLabel: 'Main',
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="event" size={20} color={tintColor} />
+        <Icon name="directions-bus" size={30} color={tintColor} />
     ),
 };
