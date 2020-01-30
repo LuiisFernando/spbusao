@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
+    padding-top: 50px;
     flex: 1;
+    background: #FFF;
 `;
 
 export const Letreiro = styled.Text`

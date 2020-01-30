@@ -93,16 +93,16 @@ export default function Main({ navigation }) {
                     value={filter}
                     onChangeText={setFilter}
                 />
-                <SearchButton>
+                {/* <SearchButton>
                     <Icon name="my-location" size={20} color="#FFF" />
-                </SearchButton>
+                </SearchButton> */}
             </SearchForm>
             {onibus && (
                 <List
                     data={onibusFiltered}
                     keyExtractor={buss => String(buss.id)}
                     renderItem={({ item }) => (
-                        <Onibus onPress={() => navigation.navigate('Onibus', { item })}>
+                        <Onibus onPress={() => navigation.navigate('Rotas', { item })}>
                             <OnibusContainer>
                                 <WrapLetreiro>
                                     <Letreiro>{item.letreiro}</Letreiro>

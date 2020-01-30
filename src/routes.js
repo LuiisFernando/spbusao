@@ -29,11 +29,14 @@ export default (isSigned = false) =>
                                         headerTransparent: true,
                                         headerTintColor: '#000',
                                         headerLeftContainerStyle: {
-                                          marginLeft: 20,
+                                          marginLeft: 20
                                         },
-                                      }
+                                      },
                                 }
-                            )
+                            ),
+                            navigationOptions: {
+                                tabBarVisible: false
+                            }
                         }
                     },
                     {
