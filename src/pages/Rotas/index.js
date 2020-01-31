@@ -6,7 +6,7 @@ import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps'
 import { getLatLngCenter } from '../../shared/CalcDistance';
 import api from '../../services/api';
 
-import { Container, Letreiro, MapContainer } from './styles';
+import { Container, Letreiro, MapContainer, InformationContainer, InformationContainer2 } from './styles';
 
 export default function Rotas({ navigation }) {
     const onibus = navigation.getParam('item');
@@ -14,9 +14,14 @@ export default function Rotas({ navigation }) {
     const [initialPosition, setInitialPosition] = useState(null);
     const [posicoes, setPosicoes] = useState([]);
 
+    // setInterval(updateLocation, 1000);
+
+    function updateLocation() {
+      onibus.cont += 1;
+      console.log('atualizando');
+    }
 
     async function loadPosicoes() {
-      debugger;
       if (onibus) {
         const response = await api.get(`/Posicao/Linha?codigoLinha=${onibus.codigo}`);
 
@@ -28,62 +33,59 @@ export default function Rotas({ navigation }) {
               longitude: posicao.px
             }
           });
+
           const raio = getLatLngCenter(busses);
 
           setPosicoes(busses)
           setInitialPosition({
             latitude: raio[0],
             longitude: raio[1],
-            latitudeDelta: 0.25,
-            longitudeDelta: 0.25
+            latitudeDelta: 0.10,
+            longitudeDelta: 0.10
           });
         }
+        console.log('onibus atualizados!');
       }
     }
 
-    
-
     useEffect(() => {
       loadPosicoes();
+      setInterval(loadPosicoes, 10000);
     }, [onibus]);
 
     return (
         <Container>
-            <Letreiro>{onibus && onibus.letreiro}</Letreiro>
+            <InformationContainer>
+              {onibus && <Letreiro>{onibus.letreiro } - { onibus.letreiroOrigem } - {onibus.letreiroDestino}</Letreiro>}
 
-            {initialPosition && (
-                <View style={styles.container}>
-                  <MapView
-                    style={styles.map} 
-                    provider={PROVIDER_GOOGLE}
-                    showsUserLocation={false}
-                    loadingEnabled={true}
-                    initialRegion={initialPosition}
-                  >
-                        {posicoes.map(buss => (
-                            <Marker key={buss.prefixo} coordinate={{ latitude: buss.latitude, longitude: buss.longitude }}>
-                                <Callout>
-                                    <View style={styles.callout}>
-                                        <Text style={styles.nomeParada}>{buss.prefixo}</Text>
-                                    </View>
-                                </Callout>
-                            </Marker>
-                        ))}
-                  </MapView>
-                </View>
-              )}
+            </InformationContainer>
+
+            <MapContainer>
+              {initialPosition && (
+                    <MapView
+                      style={styles.map} 
+                      provider={PROVIDER_GOOGLE}
+                      showsUserLocation={false}
+                      loadingEnabled={true}
+                      initialRegion={initialPosition}
+                    >
+                          {posicoes.map(buss => (
+                              <Marker key={buss.prefixo} coordinate={{ latitude: buss.latitude, longitude: buss.longitude }}>
+                                  <Callout>
+                                      <View style={styles.callout}>
+                                          <Text style={styles.nomeParada}>{buss.prefixo}</Text>
+                                      </View>
+                                  </Callout>
+                              </Marker>
+                          ))}
+                    </MapView>
+                )}
+            </MapContainer>
         </Container>
     );
 }
 
 const styles = StyleSheet.create({
-  container: {
-      ...StyleSheet.absoluteFillObject,
-      height: 450,
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 200
-  },
   map: {
       ...StyleSheet.absoluteFillObject,
       flex: 1
