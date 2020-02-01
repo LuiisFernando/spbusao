@@ -35,8 +35,6 @@ export default function Main({ navigation }) {
 
     async function loadOnibus() {
         try {
-            await dispatch(signInRequest('7d32aa212c6ae41c34f6035f53a3a2bf8ab72a8063dbdd1d7e1f1eb3e02ad093'));
-
             const response = await api.get('/Posicao');
 
             const tOnibus = response.data.l.map((onibus, index) => {
@@ -64,8 +62,8 @@ export default function Main({ navigation }) {
 
     function filterOnibus() {
         if (filter) {
-            const teste = onibus.filter(x => x.letreiro.includes(filter.toUpperCase()));
-            setOnibusFiltered(teste);
+            const onibusFilter = onibus.filter(x => x.letreiro.includes(filter.toUpperCase()));
+            setOnibusFiltered(onibusFilter);
         } else {
             setOnibusFiltered(onibus);
         }
