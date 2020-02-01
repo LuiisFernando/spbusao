@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, StyleSheet, View, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps'
+import timer from 'react-native-timer';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { getLatLngCenter } from '../../shared/CalcDistance';
+
 import api from '../../services/api';
+
+import busIcon from '../../assets/IconBus.png'
+import styleMap from '../../mapStyle.json';
 
 import { Container, Letreiro, MapContainer, InformationContainer, InformationContainer2 } from './styles';
 
-export default function Rotas({ navigation }) {
+export default function Rotas({ navigation }, props) {
     const onibus = navigation.getParam('item');
 
     const [initialPosition, setInitialPosition] = useState(null);
     const [posicoes, setPosicoes] = useState([]);
 
-    // setInterval(updateLocation, 1000);
-
-    function updateLocation() {
-      onibus.cont += 1;
-      console.log('atualizando');
-    }
 
     async function loadPosicoes() {
       if (onibus) {
@@ -29,6 +29,7 @@ export default function Rotas({ navigation }) {
           const busses = response.data.vs.map(posicao => {
             return {
               prefixo: posicao.p,
+              acessivel: posicao.a,
               latitude: posicao.py,
               longitude: posicao.px
             }
@@ -36,7 +37,7 @@ export default function Rotas({ navigation }) {
 
           const raio = getLatLngCenter(busses);
 
-          setPosicoes(busses)
+          setPosicoes(busses);
           setInitialPosition({
             latitude: raio[0],
             longitude: raio[1],
@@ -50,8 +51,15 @@ export default function Rotas({ navigation }) {
 
     useEffect(() => {
       loadPosicoes();
-      setInterval(loadPosicoes, 10000);
     }, [onibus]);
+
+    useEffect(() => {
+      // loadPosicoes();
+      timer.setInterval(props, 'updatePosicao', loadPosicoes, 5000);
+      return () => {
+        timer.clearInterval(props, 'updatePosicao');
+      }
+    });
 
     return (
         <Container>
@@ -68,12 +76,24 @@ export default function Rotas({ navigation }) {
                       showsUserLocation={false}
                       loadingEnabled={true}
                       initialRegion={initialPosition}
+                      customMapStyle={styleMap}
                     >
-                          {posicoes.map(buss => (
-                              <Marker key={buss.prefixo} coordinate={{ latitude: buss.latitude, longitude: buss.longitude }}>
+                          {posicoes.map((buss, index) => (
+                              <Marker 
+                                key={index}
+                                coordinate={{ latitude: buss.latitude, longitude: buss.longitude }}
+                                image={busIcon}
+                                style={{ transform: [{
+                                  rotate: '55deg'
+                                 }]
+                                }}
+                              >
                                   <Callout>
                                       <View style={styles.callout}>
                                           <Text style={styles.nomeParada}>{buss.prefixo}</Text>
+                                          {buss.acessivel && (
+                                            <Icon name="accessible" size={30} color="#000" />
+                                          )}
                                       </View>
                                   </Callout>
                               </Marker>

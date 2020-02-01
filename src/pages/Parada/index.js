@@ -8,6 +8,8 @@ import Map from '../../components/Map';
 
 import api from '../../services/api';
 
+import mapStyle from '../../mapStyle.json';
+
 export default function Parada() {
     const [paradas, setParadas] = useState([]);
 
@@ -25,7 +27,8 @@ export default function Parada() {
     return (
         <View style={styles.container}>
             <MapView
-                style={styles.map} 
+                style={styles.map}
+                customMapStyle={mapStyle}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={false}
                 loadingEnabled={true}
