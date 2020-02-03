@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import header from '../../assets/maps2.png';
 
 import api from '../../services/api';
-
-import { signInRequest } from '../../store/modules/auth/actions';
 
 import {
     Container,
@@ -31,7 +29,6 @@ export default function Main({ navigation }) {
     const [filter, setFilter] = useState('');
     const [onibus, setOnibus] = useState([]);
     const [onibusFiltered, setOnibusFiltered] = useState([]);
-
 
     async function loadOnibus() {
         try {

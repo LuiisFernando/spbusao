@@ -11,7 +11,7 @@ export default function Index() {
 
   return (
     <Provider store={store}>
-      <StatusBar barStyle="light-content" backgroundColor="#FFF" />
+      <StatusBar barStyle="light-content" backgroundColor="red" />
       <App />
     </Provider>
   );

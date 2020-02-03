@@ -7,6 +7,7 @@ import Auth from './pages/Auth';
 import Main from './pages/Main';
 import Rotas from './pages/Rotas';
 import Parada from './pages/Parada';
+import Previsao from './pages/Previsao';
 
 export default (isSigned = false) =>
  createAppContainer(
@@ -22,15 +23,13 @@ export default (isSigned = false) =>
                         Onibus: {
                             screen: createStackNavigator(
                                 {
-                                    Rotas
+                                    Rotas,
+                                    Previsao
                                 },
                                 {
                                     defaultNavigationOptions: {
                                         headerTransparent: true,
                                         headerTintColor: '#000',
-                                        headerLeftContainerStyle: {
-                                          marginLeft: 20
-                                        },
                                       },
                                 }
                             ),
@@ -55,7 +54,7 @@ export default (isSigned = false) =>
                 )
             },
             {
-                initialRouteName: 'Sign'
+                initialRouteName: isSigned ? 'App' : 'Sign'
             }
         )
 );

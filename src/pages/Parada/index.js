@@ -10,6 +10,8 @@ import api from '../../services/api';
 
 import mapStyle from '../../mapStyle.json';
 
+import stop from '../../assets/parada.png';
+
 export default function Parada() {
     const [paradas, setParadas] = useState([]);
 
@@ -40,7 +42,11 @@ export default function Parada() {
                 }}
             >
                 {paradas.map(parada => (
-                    <Marker key={parada.cp} coordinate={{ latitude: parada.py, longitude: parada.px }}>
+                    <Marker
+                        key={parada.cp}
+                        coordinate={{ latitude: parada.py, longitude: parada.px }}
+                        image={stop}
+                    >
                         <Callout>
                             <View style={styles.callout}>
                                 <Text style={styles.nomeParada}>{parada.np}</Text>

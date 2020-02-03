@@ -17,5 +17,5 @@ export const InformationContainer = styled.View`
 `;
 
 export const MapContainer = styled.View`
-    flex: 1;
+    flex: 3;
 `;

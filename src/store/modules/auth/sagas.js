@@ -12,9 +12,10 @@ export function* signIn({ payload }) {
 
         if (response && response.data !== true) {
             Alert.alert('ops', `ocorreu um erro ao efetuar o login`);
+            yield put(signFailure());
             return;
         }
-        
+    
         yield put(signInSuccess());
 
     } catch(e) {

@@ -63,11 +63,6 @@ export default function Rotas({ navigation }, props) {
 
     return (
         <Container>
-            <InformationContainer>
-              {onibus && <Letreiro>{onibus.letreiro } - { onibus.letreiroOrigem } - {onibus.letreiroDestino}</Letreiro>}
-
-            </InformationContainer>
-
             <MapContainer>
               {initialPosition && (
                     <MapView
@@ -124,13 +119,13 @@ const styles = StyleSheet.create({
   
 
 Rotas.navigationOptions = ({ navigation }) => ({
-    title: 'Ônibus',
+    title:  `Onibus`,
     headerLeft: () => (
       <TouchableOpacity
         onPress={() => {
           navigation.navigate('Main');
         }}>
-        <Icon name="chevron-left" size={20} color="#000" />
+        <Icon name="chevron-left" size={50} color="#000" />
       </TouchableOpacity>
     ),
 });
