@@ -1,22 +1,23 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-
-import api from '../../services/api';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import {Container, Title, Paragrafro} from './styles';
 
 export default function Profile() {
-
-    return (
-        <View>
-            <Text>PROFILE</Text>
-        </View>
-    );
+  return (
+    <Container>
+      <Title>SPBUSÃO</Title>
+      <Paragrafro>
+        SPBUSÃO é um app para rastrear e consultar informações em tempo real dos
+        ônibus da cidade de São Paulo.
+      </Paragrafro>
+    </Container>
+  );
 }
 
 Profile.navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-        <Icon name="person" size={30} color={tintColor} />
-    ),
+  tabBarIcon: ({tintColor}) => (
+    <Icon name="person" size={30} color={tintColor} />
+  ),
 };

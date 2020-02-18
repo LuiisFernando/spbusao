@@ -43,6 +43,13 @@ export default (isSigned = false) =>
               headerTintColor: '#000',
             },
           },
+          Previsao: {
+            screen: Previsao,
+            navigationOptions: {
+              headerTransparent: true,
+              headerTintColor: '#000',
+            },
+          },
         }),
       },
       {
