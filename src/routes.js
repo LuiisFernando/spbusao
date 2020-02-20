@@ -33,7 +33,7 @@ export default (isSigned = false) =>
                 height: 50,
               },
             },
-          },
+          }
         ),
         Telas: createStackNavigator({
           Rotas: {
@@ -54,6 +54,6 @@ export default (isSigned = false) =>
       },
       {
         initialRouteName: isSigned ? 'Menu' : 'Sign',
-      },
-    ),
+      }
+    )
   );

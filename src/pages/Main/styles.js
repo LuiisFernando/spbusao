@@ -49,16 +49,6 @@ export const SearchTextInput = styled.TextInput`
   padding: 0 20px;
 `;
 
-export const SearchButton = styled.TouchableOpacity`
-  width: 50px;
-  height: 50px;
-  background-color: #8e4dff;
-  border-radius: 25px;
-  justify-content: center;
-  align-items: center;
-  margin-left: 15px;
-`;
-
 export const WrapLetreiro = styled.View`
   /* flex: 1; */
   flex-direction: row;

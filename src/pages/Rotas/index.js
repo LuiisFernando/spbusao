@@ -80,12 +80,12 @@ export default function Rotas({navigation}, props) {
             loadingEnabled={true}
             initialRegion={initialPosition}
             customMapStyle={styleMap}>
-            {positions.map((buss, index) => (
+            {positions.map((busss, index) => (
               <Marker
                 key={index}
                 coordinate={{
-                  latitude: buss.latitude,
-                  longitude: buss.longitude,
+                  latitude: busss.latitude,
+                  longitude: busss.longitude,
                 }}
                 image={busIcon}
                 style={{
@@ -97,8 +97,8 @@ export default function Rotas({navigation}, props) {
                 }}>
                 <Callout>
                   <View style={styles.callout}>
-                    <Text style={styles.nomeParada}>{buss.prefixo}</Text>
-                    {buss.acessivel && (
+                    <Text style={styles.nomeParada}>{busss.prefixo}</Text>
+                    {busss.acessivel && (
                       <Icon name="accessible" size={30} color="#000" />
                     )}
                   </View>

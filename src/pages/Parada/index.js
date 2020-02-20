@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import MapView, {Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -12,7 +12,7 @@ import mapStyle from '../../mapStyle.json';
 
 import stop from '../../assets/parada.png';
 
-export default function Parada() {
+export default function Parada({navigation}) {
   const [paradas, setParadas] = useState([]);
 
   async function loadParada() {
@@ -24,6 +24,11 @@ export default function Parada() {
   useEffect(() => {
     loadParada();
   }, []);
+
+  function handleCalloutPress(codigo) {
+    console.log(codigo);
+    navigation.navigate('Previsao', {id: codigo});
+  }
 
   return (
     <View style={styles.container}>
@@ -44,7 +49,7 @@ export default function Parada() {
             key={parada.cp}
             coordinate={{latitude: parada.py, longitude: parada.px}}
             image={stop}>
-            <Callout>
+            <Callout onPress={() => handleCalloutPress(parada.cp)}>
               <View style={styles.callout}>
                 <Text style={styles.nomeParada}>{parada.np}</Text>
                 <Text style={styles.enderecoParada}>{parada.ed}</Text>
@@ -77,6 +82,11 @@ const styles = StyleSheet.create({
   },
   enderecoParada: {
     marginTop: 5,
+  },
+  previsao: {
+    marginTop: 20,
+    marginBottom: 10,
+    color: '#00afc9',
   },
 });
 
