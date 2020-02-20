@@ -98,9 +98,7 @@ export default function Main({navigation}) {
           data={onibusFiltered}
           keyExtractor={buss => String(buss.id)}
           renderItem={({item}) => (
-            // <Onibus onPress={() => navigation.navigate('Previsao', {item})}>
-            <Onibus
-              onPress={() => navigation.navigate('Previsao', {id: 670016556})}>
+            <Onibus onPress={() => navigation.navigate('Rotas', {item})}>
               <OnibusContainer>
                 <WrapLetreiro>
                   <Letreiro>{item.letreiro}</Letreiro>
