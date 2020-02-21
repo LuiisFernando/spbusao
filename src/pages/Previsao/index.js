@@ -5,7 +5,16 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '../../services/api';
 
-import {Container, Title} from './styles';
+import {
+  Container,
+  Title,
+  List,
+  Onibus,
+  OnibusContainer,
+  WrapLetreiro,
+  Letreiro,
+  OrigemDestino,
+} from './styles';
 
 export default function Previsao({navigation}) {
   const codigo = navigation.getParam('id');
@@ -24,7 +33,36 @@ export default function Previsao({navigation}) {
   }, [codigo]);
 
   return (
-    <Container>{parada ? <Title>{parada.p.np}</Title> : <Text />}</Container>
+    <Container>
+      {parada ? (
+        <>
+          <Title>{parada.p.np}</Title>
+
+          <List
+            data={parada.p.l}
+            keyExtractor={parad => String(parad.cl)}
+            renderItem={({item}) => (
+              <Onibus onPress={() => navigation.navigate('Rotas', {item})}>
+                <OnibusContainer>
+                  <WrapLetreiro>
+                    <Letreiro>{item.c}</Letreiro>
+                    <Icon
+                      name={`filter-${item.qv > 9 ? '9-plus' : item.qv}`}
+                      size={20}
+                    />
+                  </WrapLetreiro>
+                  <OrigemDestino>
+                    {item.lt0} - {item.lt1}
+                  </OrigemDestino>
+                </OnibusContainer>
+              </Onibus>
+            )}
+          />
+        </>
+      ) : (
+        <Title>Onibus não encontrado</Title>
+      )}
+    </Container>
   );
 }
 
