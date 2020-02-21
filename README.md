@@ -4,4 +4,4 @@
 No projeto é utilizado integração em tempo real com a SPTRANS.
 
 
-<img width="375" height="667" src="https://i.imgur.com/wLRvUbJ.png">
+<img width="180" height="304" src="https://i.imgur.com/wLRvUbJ.png">
