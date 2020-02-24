@@ -9,6 +9,7 @@ import Rotas from './pages/Rotas';
 import Parada from './pages/Parada';
 import Profile from './pages/Profile';
 import Previsao from './pages/Previsao';
+import PrevisaoMap from './pages/Previsao/map';
 
 export default (isSigned = false) =>
   createAppContainer(
@@ -48,6 +49,14 @@ export default (isSigned = false) =>
             navigationOptions: {
               headerTransparent: true,
               headerTintColor: '#000',
+            },
+          },
+          PrevisaoMap: {
+            screen: PrevisaoMap,
+            navigationOptions: {
+              headerTransparent: true,
+              headerTintColor: '#000',
+              // safeAreaInsets: {top: 'always'},
             },
           },
         }),

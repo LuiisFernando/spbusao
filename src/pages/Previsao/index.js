@@ -42,7 +42,19 @@ export default function Previsao({navigation}) {
             data={parada.p.l}
             keyExtractor={parad => String(parad.cl)}
             renderItem={({item}) => (
-              <Onibus onPress={() => navigation.navigate('Rotas', {item})}>
+              <Onibus
+                onPress={() =>
+                  navigation.navigate('PrevisaoMap', {
+                    item: {
+                      info: item,
+                      parada: {
+                        nome: parada.p.np,
+                        latitude: parada.p.py,
+                        longitude: parada.p.px,
+                      },
+                    },
+                  })
+                }>
                 <OnibusContainer>
                   <WrapLetreiro>
                     <Letreiro>{item.c}</Letreiro>
