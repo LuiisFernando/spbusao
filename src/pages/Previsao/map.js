@@ -10,6 +10,9 @@ import MapView, {Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useHeaderHeight} from 'react-navigation-stack';
 
+import {parseISO, formatRelative, parse} from 'date-fns';
+import pt from 'date-fns/locale/pt-BR';
+
 import {getLatLngCenter} from '../../shared/CalcDistance';
 
 import busIcon from '../../assets/IconBus.png';
@@ -25,26 +28,25 @@ import {
 
 export default function PrevisaoMap({navigation}) {
   const previsao = navigation.getParam('item');
+  const headerHeight = useHeaderHeight();
+
   const [prev, setPrev] = useState();
   const [initialPosition, setInitialPosition] = useState(null);
-  const headerHeight = useHeaderHeight();
 
   useEffect(() => {
     function loadInitialPosition() {
-      const teste = previsao.info.vs.map(posicoes => {
+      const positions = previsao.info.vs.map(posicoes => {
         return {
           latitude: posicoes.py,
           longitude: posicoes.px,
         };
       });
-      teste.push({
+      positions.push({
         latitude: previsao.parada.latitude,
         longitude: previsao.parada.longitude,
       });
 
-      const raio = getLatLngCenter(teste);
-      console.log(teste);
-      console.log('raio>> ', raio);
+      const raio = getLatLngCenter(positions);
       setInitialPosition(raio);
     }
 
@@ -84,8 +86,13 @@ export default function PrevisaoMap({navigation}) {
                 coordinate={{
                   latitude: previsao.parada.latitude,
                   longitude: previsao.parada.longitude,
-                }}
-              />
+                }}>
+                <Callout>
+                  <View>
+                    <Text>{previsao.parada.nome}</Text>
+                  </View>
+                </Callout>
+              </Marker>
               {previsao.info.vs.map((predict, index) => (
                 <Marker
                   key={index}
@@ -93,8 +100,13 @@ export default function PrevisaoMap({navigation}) {
                   coordinate={{
                     latitude: predict.py,
                     longitude: predict.px,
-                  }}
-                />
+                  }}>
+                  <Callout>
+                    <View>
+                      <Text>{predict.t}</Text>
+                    </View>
+                  </Callout>
+                </Marker>
               ))}
             </MapView>
           </View>
