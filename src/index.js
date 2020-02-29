@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { StatusBar, Alert } from 'react-native';
 import { Provider } from 'react-redux';
 
+import CodePush from 'react-native-code-push';
+
 import './config/ReactotronConfig';
 import store from './store';
 
 import App from './App';
 
-export default function Index() {
+function Index() {
 
   return (
     <Provider store={store}>
@@ -16,3 +18,7 @@ export default function Index() {
     </Provider>
   );
 }
+
+export default CodePush({
+  checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME
+})(Index);

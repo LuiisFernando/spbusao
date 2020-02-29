@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">spbusao</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">7Tg_MOTbqEqpVsxidNzNSoxWl188gTPch_5TN</string>
 </resources>
