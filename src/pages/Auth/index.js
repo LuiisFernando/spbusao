@@ -3,15 +3,15 @@ import {useDispatch} from 'react-redux';
 
 import {signInRequest} from '../../store/modules/auth/actions';
 
-import {Container, AuthText, WaitText} from './styles';
+import {Container, AuthText, WaitText, Button} from './styles';
 
-export default function Auth({navigation}) {
+export default function Auth() {
   const dispatch = useDispatch();
 
   function loginSPTRANS() {
     dispatch(
       signInRequest(
-        '7d32aa212c6ae41c34f6035f53a3a2bf8ab72a8063dbdd1d7e1f1eb3e02ad093',
+        '7d32aa212c6ae41c34f6035f53a3a2bf8ab72a8063dbdd1d7e1f1eb3e02ad09',
       ),
     );
   }
@@ -23,7 +23,9 @@ export default function Auth({navigation}) {
   return (
     <Container>
       <WaitText>Aguarde!</WaitText>
-      <AuthText>A aplicação está sendo autenticada pela sp trans.</AuthText>
+      <Button onPress={loginSPTRANS}>
+        <AuthText>A aplicação está sendo autenticada pela sp trans.</AuthText>
+      </Button>
     </Container>
   );
 }

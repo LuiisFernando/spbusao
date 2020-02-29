@@ -17,3 +17,5 @@ export const AuthText = styled.Text`
     font-weight: bold;
     padding-top: 150px;
 `;
+
+export const Button = styled.TouchableOpacity``;
