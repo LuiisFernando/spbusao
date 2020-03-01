@@ -2,9 +2,7 @@ import React, {useEffect} from 'react';
 import { Alert } from 'react-native';
 import {useDispatch} from 'react-redux';
 
-import {signInRequest, signInSuccess} from '../../store/modules/auth/actions';
-
-import api from '../../services/api';
+import {signInRequest} from '../../store/modules/auth/actions';
 
 import {Container, AuthText, WaitText, Button} from './styles';
 

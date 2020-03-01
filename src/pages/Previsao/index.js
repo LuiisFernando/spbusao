@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {Text, TouchableOpacity, Button} from 'react-native';
+import {TouchableOpacity, BackHandler} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -21,13 +21,23 @@ export default function Previsao({navigation}) {
   const [parada, setParada] = useState();
 
   useEffect(() => {
+    function handleBackButtonPressAndroid() {
+      navigation.navigate('Parada');
+      return true;
+    }
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonPressAndroid);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonPressAndroid);
+    }
+  }, []);
+
+  useEffect(() => {
     async function loadPrevisao() {
       const response = await api.get(`/Previsao/Parada?codigoParada=${codigo}`);
 
       if (response.data.p) {
         setParada(response.data);
       }
-      console.log(response.data);
     }
     loadPrevisao();
   }, [codigo]);

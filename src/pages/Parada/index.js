@@ -26,7 +26,6 @@ export default function Parada({navigation}) {
   }, []);
 
   function handleCalloutPress(codigo) {
-    console.log(codigo);
     navigation.navigate('Previsao', {id: codigo});
   }
 
