@@ -20,8 +20,7 @@ export function* signIn({ payload }) {
         yield put(signInSuccess());
 
     } catch(e) {
-        console.log(e);
-        Alert.alert('ops', `ocorreu um erro ao efetuar o login: ${e.Message}`);
+        Alert.alert('ops', `ocorreu um erro ao efetuar o login: ${e.message}`);
         yield put(signFailure());
     }
 }
