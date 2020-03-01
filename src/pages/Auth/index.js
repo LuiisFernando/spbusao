@@ -11,7 +11,7 @@ export default function Auth() {
   function loginSPTRANS() {
     dispatch(
       signInRequest(
-        '7d32aa212c6ae41c34f6035f53a3a2bf8ab72a8063dbdd1d7e1f1eb3e02ad09',
+        '7d32aa212c6ae41c34f6035f53a3a2bf8ab72a8063dbdd1d7e1f1eb3e02ad093',
       ),
     );
   }
