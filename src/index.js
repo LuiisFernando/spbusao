@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StatusBar, Alert } from 'react-native';
 import { Provider } from 'react-redux';
 
