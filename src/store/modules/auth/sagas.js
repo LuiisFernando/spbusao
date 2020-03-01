@@ -11,7 +11,6 @@ export function* signIn({ payload }) {
         const response = yield call(api.post, `/Login/Autenticar?token=${key}`);
 
         if (response && response.data !== true) {
-            console.log(response);
             Alert.alert('ops', `SPTRANS não autorizou o login com a CHAVE informada`);
             yield put(signFailure());
             return;

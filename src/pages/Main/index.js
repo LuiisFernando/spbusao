@@ -57,8 +57,6 @@ export default function Main({navigation}) {
     }
   }
 
-  // const filtro = useCallback(filterOnibus, []);
-
   useEffect(() => {
     loadOnibus();
   }, []);

@@ -36,14 +36,7 @@ export default (isSigned = false) =>
             },
           }
         ),
-        Telas: createStackNavigator({
-          Rotas: {
-            screen: Rotas,
-            navigationOptions: {
-              headerTransparent: true,
-              headerTintColor: '#000',
-            },
-          },
+        Prev: createStackNavigator({
           Previsao: {
             screen: Previsao,
             navigationOptions: {
@@ -57,6 +50,15 @@ export default (isSigned = false) =>
               headerTransparent: true,
               headerTintColor: '#000',
               // safeAreaInsets: {top: 'always'},
+            },
+          },
+        }),
+        Routes: createStackNavigator({
+          Rotas: {
+            screen: Rotas,
+            navigationOptions: {
+              headerTransparent: true,
+              headerTintColor: '#000',
             },
           },
         }),

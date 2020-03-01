@@ -5,13 +5,13 @@ import {
   TouchableOpacity,
   Text,
   SafeAreaView,
+  BackHandler
 } from 'react-native';
 import MapView, {Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useHeaderHeight} from 'react-navigation-stack';
 
-import {parseISO, formatRelative, parse} from 'date-fns';
-import pt from 'date-fns/locale/pt-BR';
+import styleMap from '../../mapStyle.json';
 
 import {getLatLngCenter} from '../../shared/CalcDistance';
 
@@ -32,6 +32,17 @@ export default function PrevisaoMap({navigation}) {
 
   const [prev, setPrev] = useState();
   const [initialPosition, setInitialPosition] = useState(null);
+
+  useEffect(() => {
+    function handleBackButtonPressAndroid() {
+      navigation.navigate('Previsao');
+      return true;
+    }
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonPressAndroid);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonPressAndroid);
+    }
+  }, []);
 
   useEffect(() => {
     function loadInitialPosition() {
@@ -80,7 +91,8 @@ export default function PrevisaoMap({navigation}) {
                 longitude: initialPosition[1],
                 latitudeDelta: 0.1,
                 longitudeDelta: 0.1,
-              }}>
+              }}
+              customMapStyle={styleMap}>
               <Marker
                 image={stop}
                 coordinate={{

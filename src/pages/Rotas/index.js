@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {TouchableOpacity, StyleSheet, View, Text} from 'react-native';
+import {TouchableOpacity, StyleSheet, View, Text, BackHandler} from 'react-native';
 import MapView, {Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps';
 import timer from 'react-native-timer';
 
@@ -14,10 +14,7 @@ import styleMap from '../../mapStyle.json';
 
 import {
   Container,
-  Letreiro,
   MapContainer,
-  InformationContainer,
-  InformationContainer2,
 } from './styles';
 
 export default function Rotas({navigation}, props) {
@@ -57,6 +54,17 @@ export default function Rotas({navigation}, props) {
   }
 
   var loadPositionsCallBack = useCallback(loadPositions, []);
+
+  useEffect(() => {
+    function handleBackButtonPressAndroid() {
+      navigation.navigate('Main');
+      return true;
+    }
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonPressAndroid);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonPressAndroid);
+    }
+  }, []);
 
   useEffect(() => {
     loadPositionsCallBack();
