@@ -19,6 +19,7 @@
         android:value="AIzaSyCzcjHcQjOtGlDhNmQr6bgCM0-tLCeYAfo"/>
 
       <activity
+        android:launchMode="singleTop"
         android:name=".MainActivity"
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
