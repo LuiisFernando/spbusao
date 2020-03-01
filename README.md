@@ -1,5 +1,5 @@
 ## SPBUSÃO
-<img src ="https://build.appcenter.ms/v0.1/apps/8a4f9288-067a-49b6-b9da-780001ad8103/branches/staging/badge" width="100" height="36">
+<img src ="https://build.appcenter.ms/v0.1/apps/8a4f9288-067a-49b6-b9da-780001ad8103/branches/staging/badge">
 
 É um app para rastrear e consultar informações em tempo real dos ônibus da cidade de São Paulo.
 No projeto é utilizado integração em tempo real com a SPTRANS.
