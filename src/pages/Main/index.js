@@ -30,28 +30,30 @@ export default function Main({navigation}) {
     try {
       const response = await api.get('/Posicao');
 
-      const tOnibus = response.data.l.map((buss, index) => {
-        return {
-          id: index,
-          codigo: buss.cl,
-          letreiro: buss.c,
-          letreiroOrigem: buss.lt0,
-          letreiroDestino: buss.lt1,
-          quantidade: buss.qv,
-        };
-      });
-
-      const onibusSanitezed = tOnibus.filter((buss, index) => {
-        return (
-          index ===
-          tOnibus.findIndex(obj => {
-            return obj.letreiro === buss.letreiro;
-          })
-        );
-      });
-
-      setOnibus(onibusSanitezed);
-      setOnibusFiltered(onibusSanitezed);
+      if (response && response.data && response.data.l) {
+        const tOnibus = response.data.l.map((buss, index) => {
+          return {
+            id: index,
+            codigo: buss.cl,
+            letreiro: buss.c,
+            letreiroOrigem: buss.lt0,
+            letreiroDestino: buss.lt1,
+            quantidade: buss.qv,
+          };
+        });
+  
+        const onibusSanitezed = tOnibus.filter((buss, index) => {
+          return (
+            index ===
+            tOnibus.findIndex(obj => {
+              return obj.letreiro === buss.letreiro;
+            })
+          );
+        });
+  
+        setOnibus(onibusSanitezed);
+        setOnibusFiltered(onibusSanitezed);
+      }
     } catch (e) {
       Alert.alert(e.message);
     }
