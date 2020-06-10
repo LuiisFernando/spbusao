@@ -1,13 +1,13 @@
 ## SPBUSÃO
 <img src ="https://build.appcenter.ms/v0.1/apps/8a4f9288-067a-49b6-b9da-780001ad8103/branches/staging/badge">
 
-É um app para rastrear e consultar informações em tempo real dos ônibus da cidade de São Paulo.
-No projeto é utilizado integração em tempo real com a SPTRANS.
+SPBUSAO is a app to track and consult information in realtime of busses at city of são paulo
 
-O projeto tem integração com a plataforma da microsoft appcenter pra enviar atualizações de código sem precisar reinstalar o aplicativo.
-Para enviar push notification é utilizado a lib OneSignal.
+The project use information from SPTRANS API
 
-O aplicativo conta com uma tela listando todos os ônibus disponivel naquele momento na cidade, uma tela com todas as paradas de onibus disponivel. (Infelizmente a SPTRANS só disponibiliza paradas de corredores), uma tela listando os onibus previsto em uma parada selecionada e uma tela indicando o horario que o onibus selecionado chegará na parada selecionada.
+The project use appcenter as CI to send updates with no need to reinstal from app's stores
+
+the app have one screen to list all busses in that time in city, one screen to see all stops available (unfortunately the SPTRANS only makes available big stops), one screen to list  expected busses and expected time to one stop.
 
 
 ## PRINTS
