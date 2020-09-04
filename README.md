@@ -1,7 +1,8 @@
 ## SPBUSÃO
 <img src ="https://build.appcenter.ms/v0.1/apps/8a4f9288-067a-49b6-b9da-780001ad8103/branches/staging/badge">
 
-SPBUSAO is a app to track and consult information in realtime of busses at city são paulo 
+SPBUSAO is a app to track and consult information in realtime of busses at city são paulo.
+
 The project use information from SPTRANS API
 
 The project use appcenter as CI to send updates with no need to reinstal from app's stores
