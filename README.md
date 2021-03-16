@@ -3,11 +3,11 @@
 
 SPBUSAO is an app to track and consult information in realtime of busses from são paulo city.
 
-The project use information from SPTRANS API
+The project consume information from SPTRANS API
 
 The project use appcenter as CI to send updates with no need to reinstal from app's stores
 
-the app have one screen to list all busses in that time in city, one screen to see all stops available (unfortunately the SPTRANS only makes available big stops), one screen to list  expected busses and expected time to one stop.
+the app have one screen to list all busses in that time in city, one screen to see all stops available (unfortunately the SPTRANS let read info from big stops), one screen to list  expected busses and expected time to one stop.
 
 
 ## PRINTS
